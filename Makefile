@@ -1,71 +1,52 @@
 ##
-## Makefile for  in /home/fradet_j/PSU/PSU_2016_minishell2
+1;2802;0c## Makefile for  in /home/lenoir_g/rendu/template
 ##
-## Made by Julien Fradet
-## Login   <fradet_j@epitech.net>
+## Made by Guillaume LENOIR
+## Login   <lenoir_g@epitech.net>
 ##
-## Started on  Wed Mar 22 10:17:42 2017 Julien Fradet
-## Last update Mon May  8 19:25:38 2017 Julien
+## Started on  Mon Oct 24 09:14:27 2016 Guillaume LENOIR
+## Last update Wed May 10 21:24:03 2017 LENOIR
 ##
 
-RM	= rm -f
+SRC	= cd.c	\
+	env.c	\
+	env_func.c	\
+	epur.c	\
+	exec.c	\
+	main.c	\
+	prompt.c	\
+	redirect.c	\
+	classic.c
 
-CC	= gcc -g
+OBJ	= $(addprefix src/, $(SRC:.c=.o))
 
-CFLAGS	= -I ./include -W -Wextra -Wall
+LDFLAGS = -L./lib/my/ -lmy -lncurses
 
-SRCS	= src/my_minishell2.c         \
-	  src/lib/my_str_to_wordtab.c \
-	  src/lib/my_putchar.c        \
-	  src/lib/my_putstr.c         \
-	  src/lib/my_strlen.c         \
-	  src/lib/get_next_line.c     \
-	  src/lib/my_free_wordtab.c   \
-	  src/lib/my_strncmp.c        \
-	  src/lib/my_strdup.c         \
-	  src/tablen.c                \
-	  src/get_env.c               \
-	  src/my_concat.c             \
-	  src/exit_fct.c              \
-	  src/lib/my_get_nbr.c        \
-	  src/lib/my_strcpy.c         \
-	  src/cd_fct.c                \
-	  src/lib/my_show_wordtab.c   \
-	  src/setenv_fct.c            \
-	  src/lib/my_realloc.c        \
-	  src/lib/my_unalloc.c        \
-	  src/unsetenv_fct.c          \
-	  src/lib/my_strcmp.c         \
-	  src/my_lessconcat.c         \
-	  src/lib/my_memset.c         \
-	  src/check_isat.c            \
-	  src/env_fct.c               \
-	  src/lib/my_strcat.c         \
-	  src/case_enter.c            \
-	  src/fct_free.c              \
-	  src/signal.c                \
-	  src/crtl_c.c                \
-	  src/annexe.c                \
-	  src/lib/epur_str.c          \
-	  src/not_builtins.c          \
-	  src/count_delimitor.c       \
-	  src/cd_annexe.c
+CFLAGS	= -I./include/ -g
 
-OBJS	= $(SRCS:.c=.o)
+RM 	= rm -f
 
-NAME	= 42sh
+CC	= gcc
 
-all:	$(NAME)
+DIR	= lib/my
 
-$(NAME): $(OBJS)
-	$(CC) -o $(NAME) $(SRCS) $(CFLAGS)
+NAME	= mysh
+
+$(NAME): $(OBJ)
+	@(cd $(DIR) && $(MAKE))
+	$(CC) -o $(NAME) $(OBJ) $(LDFLAGS) $(CFLAGS)
+
+all: $(NAME)
 
 clean:
-	$(RM) $(OBJS)
+	$(RM) $(OBJ)
+	cd $(DIR) && ($(MAKE) clean)
 
-fclean: clean
+fclean:
+	$(RM) $(OBJ)
 	$(RM) $(NAME)
+	cd $(DIR) && ($(MAKE) clean)
 
-re: fclean all
+re: lib fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re lib
