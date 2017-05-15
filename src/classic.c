@@ -5,35 +5,34 @@
 ** Login   <guillaume.lenoir@epitech.eu>
 ** 
 ** Started on  Sat Apr  8 05:45:22 2017 LENOIR
-** Last update Wed May 10 03:59:51 2017 LENOIR
+** Last update Mon May 15 06:36:07 2017 LENOIR
 */
 
 #include <sys/types.h>
 #include <sys/wait.h>
+#include <string.h>
 #include "mysh.h"
 
-int	exec_bin(char *path, char **args ,char **env)
+int	exec_bin(char *path, char **args ,char **env, char *entree)
 {
   int	status;
   pid_t	pid;
-
+  
   if ((pid = fork()) == BREAK)
     return (BREAK);
   if (pid == 0)
     {
       if (execve(path, args, env) == BREAK)
 	return (BREAK);
-      kill(getpid(), SIGINT);
     }
   else
     {
       wait(&status);
-      free(env);
     }
   return (SUCCES);
 }
 
-int	exec_binaire(char **tab, t_sh *sh)
+int	exec_binaire(char **tab, t_sh *sh, t_cmd cmd)
 {
   int	i;
   char	*path;
@@ -52,7 +51,7 @@ int	exec_binaire(char **tab, t_sh *sh)
       path = my_strlcat(path, tab[0]);
       if (access(path, F_OK | X_OK) == 0)
 	{
-	  exec_bin(path, tab, env_tab(sh->env_list, 0));
+	  exec_bin(path, tab, env_tab(sh->env_list, 0), "guigui");
 	  return (SUCCES);
 	}
       free(path);
@@ -62,10 +61,12 @@ int	exec_binaire(char **tab, t_sh *sh)
 }
 
 
-int	classic_exec(t_cmd cmd, t_sh *sh)
+int	classic_exec(t_cmd cmd, t_sh *sh, int fd)
 {
   if ((cmd.tab = my_str_to_wordtab(cmd.cmd, ' ')) == NULL)
     return (0);
+  /*if (fd != 1)
+    dup2(fd, 1);*/
   else if (my_strcmp(cmd.tab[0], "exit"))
     {
       if (cmd.tab[1] && my_is_digit(cmd.tab[1]))
@@ -80,12 +81,11 @@ int	classic_exec(t_cmd cmd, t_sh *sh)
     draw_env(sh->env_list);
   else if (my_strcmp(cmd.tab[0], "setenv"))
     draw_env(sh->env_list);
-  else if (exec_binaire(cmd.tab, sh) == SUCCES);
+  else if (exec_binaire(cmd.tab, sh, cmd) == SUCCES);
   else if (my_strcmp(cmd.tab[0], "unsetenv"))
     draw_env(sh->env_list);
   else if ((cmd.tab[0][0] == '.' || cmd.tab[0][0] == '/') &&
 	   access(cmd.tab[0], F_OK | X_OK) == 0)
-    exec_bin(cmd.tab[0], cmd.tab, env_tab(sh->env_list, 0));
-  if (cmd.fdred != -1)
-    dup2(cmd.fdred, 1);
+    exec_bin(cmd.tab[0], cmd.tab, env_tab(sh->env_list, 0), "");
+  
 }

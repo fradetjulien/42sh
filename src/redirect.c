@@ -5,7 +5,7 @@
 ** Login   <guillaume.lenoir@epitech.eu>
 ** 
 ** Started on  Fri Apr  7 23:09:17 2017 LENOIR
-** Last update Wed May 10 05:10:51 2017 LENOIR
+** Last update Mon May 15 00:58:50 2017 LENOIR
 */
 
 #include <sys/types.h>
@@ -69,9 +69,8 @@ char	*dr_red(char *line, t_cmd *cmd)
   i = 0;
   cmd->redirect = 2;
   cmd->args = get_args(line, '>');
-  if ((fd = open(cmd->args, O_CREAT | O_APPEND | O_WRONLY, 0644)) == -1)
-    return (NULL);
-  dup2(1, fd);
+  /*if ((fd = open(cmd->args, O_CREAT | O_APPEND | O_WRONLY, 0644)) == -1)
+    return (NULL);*/
   cmd->fdred = fd;
   return (get_lined(line, '>'));
 }

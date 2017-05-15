@@ -5,7 +5,7 @@
 ** Login   <guillaume.lenoir@epitech.eu>
 ** 
 ** Started on  Fri Apr  7 06:53:36 2017 LENOIR
-** Last update Wed May 10 03:58:30 2017 LENOIR
+** Last update Mon May 15 06:14:12 2017 LENOIR
 */
 
 #include "mysh.h"
@@ -32,8 +32,9 @@ int	exec_cmd(char *c, t_sh *sh)
   cmd.cmd = c;
   cmd.fdred = -1;
   cmd.cmd = extrude_red(cmd.cmd, &cmd);
-  printf("ll:%s, args:%s\n", cmd.cmd, cmd.args);
   if (count_char(cmd.cmd, '|') == 0)
-    return (classic_exec(cmd, sh));
+    return (classic_exec(cmd, sh, 1));
+  else
+    return (piped_exec(cmd, sh));
   
 }

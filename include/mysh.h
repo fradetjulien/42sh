@@ -5,7 +5,7 @@
 ** Login   <lenoir_g@epitech.net>
 **
 ** Started on  Wed Nov  4 03:34:57 2015 guillaume lenoir
-** Last update Wed May 10 03:56:33 2017 LENOIR
+** Last update Mon May 15 13:33:55 2017 LENOIR
 */
 
 #ifndef	MYSH_H_
@@ -59,7 +59,7 @@ char	*epur_line(char *line);
 int	exec_cmd(char *c, t_sh *sh);
 int	draw_prompt(t_sh *sh);
 char	*dr_red(char *line, t_cmd *cmd);
-int	classic_exec(t_cmd cmd, t_sh *sh);
+int	classic_exec(t_cmd cmd, t_sh *sh, int);
 int	cd_command(t_cmd cmd, t_sh *sh);
 
 #endif	/* MYSH_H_ */

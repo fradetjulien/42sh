@@ -1,15 +1,16 @@
 ##
-1;2802;0c## Makefile for  in /home/lenoir_g/rendu/template
+## Makefile for  in /home/lenoir_g/rendu/template
 ##
 ## Made by Guillaume LENOIR
 ## Login   <lenoir_g@epitech.net>
 ##
 ## Started on  Mon Oct 24 09:14:27 2016 Guillaume LENOIR
-## Last update Wed May 10 21:24:03 2017 LENOIR
+## Last update Mon May 15 15:12:02 2017 LENOIR
 ##
 
 SRC	= cd.c	\
 	env.c	\
+	piped.c	\
 	env_func.c	\
 	epur.c	\
 	exec.c	\
@@ -30,7 +31,7 @@ CC	= gcc
 
 DIR	= lib/my
 
-NAME	= mysh
+NAME	= 42sh
 
 $(NAME): $(OBJ)
 	@(cd $(DIR) && $(MAKE))
