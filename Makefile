@@ -1,53 +1,75 @@
 ##
-## Makefile for  in /home/lenoir_g/rendu/template
+## Makefile for  in /home/fradet_j/PSU/PSU_2016_minishell2
 ##
-## Made by Guillaume LENOIR
-## Login   <lenoir_g@epitech.net>
+## Made by Julien Fradet
+## Login   <fradet_j@epitech.net>
 ##
-## Started on  Mon Oct 24 09:14:27 2016 Guillaume LENOIR
-## Last update Mon May 15 15:12:02 2017 LENOIR
+## Started on  Wed Mar 22 10:17:42 2017 Julien Fradet
+## Last update Wed May 17 18:24:16 2017 Julien
 ##
 
-SRC	= cd.c	\
-	env.c	\
-	piped.c	\
-	env_func.c	\
-	epur.c	\
-	exec.c	\
-	main.c	\
-	prompt.c	\
-	redirect.c	\
-	classic.c
+RM	= rm -f
 
-OBJ	= $(addprefix src/, $(SRC:.c=.o))
+CC	= gcc -g
 
-LDFLAGS = -L./lib/my/ -lmy -lncurses
+CFLAGS	= -I ./include -W -Wextra -Wall
 
-CFLAGS	= -I./include/ -g
+SRCS	= src/my_minishell2.c         \
+	  src/lib/my_str_to_wordtab.c \
+	  src/lib/my_putchar.c        \
+	  src/lib/my_putstr.c         \
+	  src/lib/my_strlen.c         \
+	  src/lib/get_next_line.c     \
+	  src/lib/my_free_wordtab.c   \
+	  src/lib/my_strncmp.c        \
+	  src/lib/my_strdup.c         \
+	  src/tablen.c                \
+	  src/get_env.c               \
+	  src/my_concat.c             \
+	  src/exit_fct.c              \
+	  src/lib/my_get_nbr.c        \
+	  src/lib/my_strcpy.c         \
+	  src/cd_fct.c                \
+	  src/lib/my_show_wordtab.c   \
+	  src/setenv_fct.c            \
+	  src/lib/my_realloc.c        \
+	  src/lib/my_unalloc.c        \
+	  src/unsetenv_fct.c          \
+	  src/lib/my_strcmp.c         \
+	  src/my_lessconcat.c         \
+	  src/lib/my_memset.c         \
+	  src/check_isat.c            \
+	  src/env_fct.c               \
+	  src/lib/my_strcat.c         \
+	  src/case_enter.c            \
+	  src/fct_free.c              \
+	  src/signal.c                \
+	  src/crtl_c.c                \
+	  src/annexe.c                \
+	  src/lib/epur_str.c          \
+	  src/not_builtins.c          \
+	  src/count_delimitor.c       \
+	  src/cd_annexe.c 	      \
+	  src/redirections.c	      \
+	  src/fct_delimitor.c	      \
+	  src/absolute_path.c	      \
+	  src/permissions.c
 
-RM 	= rm -f
-
-CC	= gcc
-
-DIR	= lib/my
+OBJS	= $(SRCS:.c=.o)
 
 NAME	= 42sh
 
-$(NAME): $(OBJ)
-	@(cd $(DIR) && $(MAKE))
-	$(CC) -o $(NAME) $(OBJ) $(LDFLAGS) $(CFLAGS)
+all:	$(NAME)
 
-all: $(NAME)
+$(NAME): $(OBJS)
+	$(CC) -o $(NAME) $(SRCS) $(CFLAGS)
 
 clean:
-	$(RM) $(OBJ)
-	cd $(DIR) && ($(MAKE) clean)
+	$(RM) $(OBJS)
 
-fclean:
-	$(RM) $(OBJ)
+fclean: clean
 	$(RM) $(NAME)
-	cd $(DIR) && ($(MAKE) clean)
 
-re: lib fclean all
+re: fclean all
 
-.PHONY: all clean fclean re lib
+.PHONY: all clean fclean re
