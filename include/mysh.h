@@ -5,7 +5,7 @@
 ** Login   <lenoir_g@epitech.net>
 **
 ** Started on  Wed Nov  4 03:34:57 2015 guillaume lenoir
-** Last update Mon May 15 13:33:55 2017 LENOIR
+** Last update Wed May 17 19:12:02 2017 LENOIR
 */
 
 #ifndef	MYSH_H_
@@ -38,12 +38,20 @@ typedef struct	s_sh
   int	count;
 }		t_sh;
 
+typedef struct	s_pipe
+{
+  char	**tab;
+  char	**tabe;
+  t_sh	*sh;
+  int	max;
+}		t_pipe;
+
 typedef struct	s_cmd
 {
   char	*cmd;
   char	**tab;
-  int	redirect;
-  int	fdred;
+  int	red_l;
+  int	red_r;
   char	*args;
   char	***pipe;
 }		t_cmd;

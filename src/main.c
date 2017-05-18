@@ -5,7 +5,7 @@
 ** Login   <guillaume.lenoir@epitech.eu>
 ** 
 ** Started on  Tue Mar 21 15:52:06 2017 LENOIR
-** Last update Wed May 10 00:38:55 2017 LENOIR
+** Last update Mon May 15 23:25:05 2017 LENOIR
 */
 
 #include "mysh.h"
@@ -16,7 +16,7 @@ int             handle_sig_ending()
     return (BREAK);
   if (signal(SIGINT, SIG_DFL) == SIG_ERR)
     return (BREAK);
-  return (1);
+    return (1);
 }
 
 int             handle_sig()

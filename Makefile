@@ -5,7 +5,7 @@
 ## Login   <lenoir_g@epitech.net>
 ##
 ## Started on  Mon Oct 24 09:14:27 2016 Guillaume LENOIR
-## Last update Mon May 15 15:12:02 2017 LENOIR
+## Last update Thu May 18 06:20:41 2017 LENOIR
 ##
 
 SRC	= cd.c	\
@@ -13,6 +13,7 @@ SRC	= cd.c	\
 	piped.c	\
 	env_func.c	\
 	epur.c	\
+	redir.c	\
 	exec.c	\
 	main.c	\
 	prompt.c	\
