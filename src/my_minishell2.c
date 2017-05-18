@@ -5,7 +5,7 @@
 ** Login   <fradet_j@epitech.net>
 ** 
 ** Started on  Wed Mar 22 10:12:33 2017 Julien Fradet
-** Last update Thu May 18 10:00:34 2017 Julien
+** Last update Fri May 19 00:24:35 2017 Julien
 */
 
 #include <string.h>
@@ -92,7 +92,6 @@ int		execute(char *path, char **av, char **env, int *error)
       if ((er = execve(path, av, env)) == -1)
 	{
 	  my_putstr("Permission denied\n");
-	  //kill(pid, SIGINT);
 	  return (EXIT_FAILURE);
 	}
     }
@@ -122,24 +121,23 @@ int		main(UNUSED int ac, UNUSED char **av, char **env)
   while ((cmd = get_next_line(0)))
     {
       if ((error = count_delimitor(cmd)) != 0) return (0);
-      cmd = epur_str(cmd); if (annexe(cmd, ev) == 1);
+      cmd = epur_str(cmd);
+      if (annexe(cmd, ev) == 1);
+      if (((absolute_path(cmd, &error)) == 1) &&
+	  (not_builtins(tab = str_to_wordtab(cmd, ' ')) == 0))
+	{
+	  if (execute(cmd, av, env, &error) == EXIT_FAILURE)
+	    error = 1;
+	}
       else
 	{
-	  if ((absolute_path(cmd, &error)) == 1)
-	    {
-	      if (execute(cmd, av, env, &error) == EXIT_FAILURE)
-		error = 1;
-	    }
-	  else
-	    {
-	      tab = str_to_wordtab(cmd, ' '); builtins_fct(&ev, tab, cmd, &error);
-	      if ((chemin = my_access(tab, get_env(env, "PATH="))) != NULL)
-		execute(chemin, tab, env, &error);
-	      else if (error != 1)
-		if ((i = not_builtins(tab)) == 0) print_error(tab, &error);
-	    }
-	  if (annexe(cmd, ev) != 1) check_isat();
+	  tab = str_to_wordtab(cmd, ' '); builtins_fct(&ev, tab, cmd, &error);
+	  if ((chemin = my_access(tab, get_env(env, "PATH="))) != NULL)
+	    execute(chemin, tab, env, &error);
+	  else if (error != 1)
+	    if ((i = not_builtins(tab)) == 0) print_error(tab, &error);
 	}
+      if (annexe(cmd, ev) != 1) check_isat();
     }
   return (error);
 }

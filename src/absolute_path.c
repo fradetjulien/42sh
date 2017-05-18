@@ -5,7 +5,7 @@
 ** Login   <julien@epitech.net>
 ** 
 ** Started on  Tue May 16 14:56:30 2017 Julien
-** Last update Thu May 18 06:20:37 2017 Julien
+** Last update Fri May 19 00:04:05 2017 Julien
 */
 
 #include <string.h>
@@ -28,7 +28,10 @@ int		execute_fct(char *path, char **av, char **env, int *error)
   if (pid == 0 && path != NULL)
     {
       if ((er = execve(path, av, env)) == -1)
-	return (EXIT_FAILURE);
+	{
+	  my_putstr("Exec format error. Binary file not executable.\n");
+	  return (EXIT_FAILURE);
+	}
     }
   else if (pid > 0)
     {
@@ -44,9 +47,7 @@ int		execute_fct(char *path, char **av, char **env, int *error)
 int		absolute_path(char *cmd, int *error)
 {
   int		i;
-  int		true;
 
-  true = 0;
   i = -1;
   if (strncmp(cmd, "/", 1) == 0)
     {
@@ -62,9 +63,10 @@ int		absolute_path(char *cmd, int *error)
     {
       while (cmd && cmd[++i] != '\0')
 	{
-	  if ((cmd[i] == '/') && (permissions(cmd, error) == 0) && (strncmp(cmd, "./", 2) != 0))
+	  if ((cmd[i] == '/') && (permissions(cmd, error) == 0) &&
+	      (strncmp(cmd, "./", 2) != 0))
 	    return (1);
 	}
     }
-  return (true);
+  return (0);
 }

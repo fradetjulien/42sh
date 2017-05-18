@@ -5,7 +5,7 @@
 ** Login   <fradet_j@epitech.net>
 ** 
 ** Started on  Wed Mar 22 23:14:14 2017 Julien Fradet
-** Last update Thu Apr 20 01:59:59 2017 Julien
+** Last update Thu May 18 23:55:04 2017 Julien
 */
 
 #include <dirent.h>
@@ -19,23 +19,11 @@
 
 int		check_dir(char **tab)
 {
-  DIR		*dir;
-  int		cpt;
-  struct dirent *fichier_lu;
   struct stat	st;
 
-  cpt = 0;
-  if ((dir = opendir(".")) == NULL)
-    return (-1);
-  while ((fichier_lu = readdir(dir)))
-    if (my_strcmp(fichier_lu->d_name, tab[1]) == 0)
-      cpt = 1;
-  if (closedir(dir) == -1)
-    return (84);
-  if (cpt == 1)
-    if ((stat(tab[1], &st)) == 0)
-      if (S_ISDIR(st.st_mode))
-	return (0);
+  if ((stat(tab[1], &st)) == 0)
+    if (S_ISDIR(st.st_mode))
+      return (0);
   return (1);
 }
 
@@ -101,7 +89,8 @@ int		cd_fct(char *cmd, char **tab, char ***ev, int *error)
     {
       if ((path = malloc(sizeof(char *) * my_strlen(tab[1]))) == NULL)
 	return (-1);
-      if ((my_strcmp(tab[1], "-") == 0) && (*ev != NULL)) cd_tiret(ev, pwd, error);
+      if ((my_strcmp(tab[1], "-") == 0) && (*ev != NULL))
+	cd_tiret(ev, pwd, error);
       else if ((check_dir(tab)) == 0 || tab[1][0] == '/')
 	{
 	  pwd = get_oldpwd(*ev);
@@ -115,7 +104,6 @@ int		cd_fct(char *cmd, char **tab, char ***ev, int *error)
 	  my_putstr(tab[1]); my_putstr(": Not a directory.\n");
 	  *error = 1;
 	}
-      free(path);
     }
   return (0);
 }
