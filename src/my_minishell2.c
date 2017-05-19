@@ -5,7 +5,7 @@
 ** Login   <fradet_j@epitech.net>
 ** 
 ** Started on  Wed Mar 22 10:12:33 2017 Julien Fradet
-** Last update Fri May 19 00:28:15 2017 Julien
+** Last update Fri May 19 14:45:06 2017 Julien
 */
 
 #include <string.h>
@@ -127,7 +127,7 @@ int		main(UNUSED int ac, UNUSED char **av, char **env)
 	  if (((absolute_path(cmd, &error)) == 1) &&
 	      (not_builtins(tab = str_to_wordtab(cmd, ' ')) == 0))
 	    {
-	      if (execute(cmd, av, env, &error) == EXIT_FAILURE)
+	      if (execute_fct(cmd, av, env, &error) == EXIT_FAILURE)
 		error = 1;
 	    }
 	  else

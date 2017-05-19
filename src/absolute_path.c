@@ -5,7 +5,7 @@
 ** Login   <julien@epitech.net>
 ** 
 ** Started on  Tue May 16 14:56:30 2017 Julien
-** Last update Fri May 19 00:04:05 2017 Julien
+** Last update Fri May 19 15:34:01 2017 Julien
 */
 
 #include <string.h>
@@ -29,7 +29,10 @@ int		execute_fct(char *path, char **av, char **env, int *error)
     {
       if ((er = execve(path, av, env)) == -1)
 	{
-	  my_putstr("Exec format error. Binary file not executable.\n");
+	  my_putstr(path);
+	  my_putstr(": Exec format error. Binary file not executable.\n");
+	  //kill(getpid(), SIGKILL);
+	  exit (1);
 	  return (EXIT_FAILURE);
 	}
     }

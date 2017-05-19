@@ -5,11 +5,12 @@
 ** Login   <fradet_j@epitech.net>
 ** 
 ** Started on  Wed Mar 22 23:14:14 2017 Julien Fradet
-** Last update Thu May 18 23:55:04 2017 Julien
+** Last update Fri May 19 17:30:26 2017 Julien
 */
 
 #include <dirent.h>
 #include <fcntl.h>
+#include <string.h>
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <unistd.h>
@@ -35,19 +36,23 @@ char		**get_pwd(char **ev)
   int		i;
 
   i = -1;
-  if ((tmp = malloc(sizeof(char) * 255)) == NULL)
-    return (NULL);
+  if ((tmp = malloc(sizeof(char) * 255)) == NULL) return (NULL);
   getcwd(tmp, 255);
   pwd_tmp = my_strdup(tmp);
   free(tmp);
-  while (ev && my_strncmp(ev[++i], "PWD", my_strlen("PWD")) != 0);
-  free(ev[i]);
-  pwd = my_concat("PWD", '=', pwd_tmp);
-  if ((ev[i] = malloc(sizeof(char) * my_strlen(pwd))) == NULL)
-    return (NULL);
-  ev[i] = my_strdup(pwd);
-  free(pwd);
-  free(pwd_tmp);
+  while (ev && ev[++i] != NULL)
+    {
+      if (my_strncmp(ev[i], "PWD", my_strlen("PWD")) == 0)
+	{
+	  free(ev[i]);
+	  pwd = my_concat("PWD", '=', pwd_tmp);
+	  if ((ev[i] = malloc(sizeof(char) * my_strlen(pwd))) == NULL)
+	    return (NULL);
+	  ev[i] = my_strdup(pwd);
+	  free(pwd);
+	  free(pwd_tmp);
+	}
+    }
   return (ev);
 }
 
@@ -55,11 +60,22 @@ char		*get_oldpwd(char **ev)
 {
   char		*pwd;
   int		i;
+  int		statut;
 
+  statut = 0;
   i = -1;
-  while (ev && my_strncmp(ev[++i], "PWD", my_strlen("PWD")) != 0);
-  pwd = my_strdup(ev[i]);
-  pwd = pwd + 4;
+  pwd = NULL;
+  while (ev && ev[++i] != NULL)
+    {
+      if (my_strncmp(ev[i], "PWD", my_strlen("PWD")) == 0)
+	{
+	  pwd = my_strdup(ev[i]);
+	  pwd = pwd + 4;
+	  statut = 1;
+	}
+    }
+  if (statut == 0)
+    return (NULL);
   return (pwd);
 }
 
@@ -67,15 +83,25 @@ char		**path_oldpwd(char **ev, char *pwd)
 {
   int		i;
   char		*old_pwd;
+  int		statut;
 
+  statut = 0;
   i = -1;
-  while (ev && (my_strncmp(ev[++i], "OLDPWD", my_strlen("OLDPWD"))) != 0);
-  free(ev[i]);
-  old_pwd = my_concat("OLDPWD", '=', pwd);
-  if ((ev[i] = malloc(sizeof(char) * my_strlen(old_pwd))) == NULL)
+  while (ev && ev[++i] != NULL)
+    {
+      if (my_strncmp(ev[i], "OLDPWD", my_strlen("OLDPWD")) == 0)
+	{
+	  free(ev[i]);
+	  old_pwd = my_concat("OLDPWD", '=', pwd);
+	  if ((ev[i] = malloc(sizeof(char) * my_strlen(old_pwd))) == NULL)
+	    return (NULL);
+	  ev[i] = my_strdup(old_pwd);
+	  free(old_pwd);
+	  statut = 1;
+	}
+    }
+  if (statut == 0)
     return (NULL);
-  ev[i] = my_strdup(old_pwd);
-  free(old_pwd);
   return (ev);
 }
 
@@ -85,6 +111,7 @@ int		cd_fct(char *cmd, char **tab, char ***ev, int *error)
   char		*pwd;
 
   pwd = NULL;
+  if (strcmp(cmd, "cd") == 0 && tab[1] == NULL) cd_alone(*ev);
   if (my_strcmp(cmd, "cd") == 0 && tab[1] != NULL)
     {
       if ((path = malloc(sizeof(char *) * my_strlen(tab[1]))) == NULL)
@@ -93,8 +120,7 @@ int		cd_fct(char *cmd, char **tab, char ***ev, int *error)
 	cd_tiret(ev, pwd, error);
       else if ((check_dir(tab)) == 0 || tab[1][0] == '/')
 	{
-	  pwd = get_oldpwd(*ev);
-	  *ev = path_oldpwd(*ev, pwd);
+	  pwd = get_oldpwd(*ev); *ev = path_oldpwd(*ev, pwd);
 	  path = my_strcpy(path, tab[1]);
 	  if ((chdir(path)) == -1) return (1);
 	  *ev = get_pwd(*ev);

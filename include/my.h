@@ -5,7 +5,7 @@
 ** Login   <fradet_j@epitech.net>
 ** 
 ** Started on  Wed Mar 22 10:15:23 2017 Julien Fradet
-** Last update Thu May 18 06:21:36 2017 Julien
+** Last update Fri May 19 16:26:11 2017 Julien
 */
 
 #ifndef MY_H_
@@ -21,6 +21,7 @@ char	*my_access(char **, char *);
 char	*get_oldpwd(char **);
 int	unsetenv_fct(char ***, char **, char *);
 int	cd_fct(char *, char **, char ***, int *);
+int	cd_alone(char **);
 int	builtins_fct(char ***, char **, char *, int *);
 int	setenv_fct(char ***, char **, char *, int *);
 int	tablen(char **);
@@ -32,6 +33,7 @@ int	annexe(char *, char **);
 int	not_builtins(char **);
 int	fct_global(char *, char **, char **);
 int	execute(char *, char **, char **, int *);
+int	execute_fct(char *, char **, char **, int *);
 int	count_delimitor(char *);
 int	cd_tiret(char ***, char *, int *);
 int	permissions(char *, int *);

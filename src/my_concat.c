@@ -5,7 +5,7 @@
 ** Login   <fradet_j@epitech.net>
 ** 
 ** Started on  Wed Mar 22 16:57:53 2017 Julien Fradet
-** Last update Thu Apr 20 02:01:55 2017 Julien
+** Last update Fri May 19 17:29:45 2017 Julien
 */
 
 #include <stdlib.h>
@@ -19,6 +19,8 @@ char		*my_concat(char	*str, char c, char *sec_str)
   char		*path_cmd;
   int		len;
 
+  if (str == NULL || sec_str == NULL)
+    return (NULL);
   len = (my_strlen(str)) + (my_strlen(sec_str)) + 2;
   if ((path_cmd = malloc(sizeof(char) * len)) == NULL)
     return (NULL);
