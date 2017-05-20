@@ -5,7 +5,7 @@
 ** Login   <fradet_j@epitech.net>
 ** 
 ** Started on  Wed Mar 22 23:14:14 2017 Julien Fradet
-** Last update Sat May 20 06:38:15 2017 Julien
+** Last update Sun May 21 00:08:36 2017 Julien
 */
 
 #include <dirent.h>
@@ -101,7 +101,7 @@ char		**path_oldpwd(char **ev, char *pwd)
 	}
     }
   if (statut == 0)
-    return (NULL);
+    return (ev);
   return (ev);
 }
 
