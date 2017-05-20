@@ -5,7 +5,7 @@
 ** Login   <fradet_j@epitech.net>
 ** 
 ** Started on  Wed Mar 22 10:15:23 2017 Julien Fradet
-** Last update Fri May 19 16:26:11 2017 Julien
+** Last update Sat May 20 05:11:27 2017 Julien
 */
 
 #ifndef MY_H_
@@ -38,6 +38,7 @@ int	count_delimitor(char *);
 int	cd_tiret(char ***, char *, int *);
 int	permissions(char *, int *);
 int	permissions_bis(char *, int *);
+int	permissions_exec(char *, char **, int *);
 int	absolute_path(char *, int *);
 void	check_isat();
 void	env_fct(char **);

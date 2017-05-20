@@ -5,7 +5,7 @@
 ** Login   <julien@epitech.net>
 ** 
 ** Started on  Tue May  9 19:39:30 2017 Julien
-** Last update Fri May 19 15:29:02 2017 Julien
+** Last update Sat May 20 06:40:55 2017 Julien
 */
 
 #include <sys/types.h>
@@ -23,7 +23,7 @@ int		permissions(char *cmd, int *error)
     return (-1);
   if (S_ISDIR(info.st_mode))
     {
-      my_putstr(cmd); my_putstr("Permission denied.\n");
+      my_putstr(cmd); my_putstr(": Permission denied.\n");
       *error = 1;
       return (-1);
     }

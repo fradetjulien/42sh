@@ -5,7 +5,7 @@
 ## Login   <fradet_j@epitech.net>
 ##
 ## Started on  Wed Mar 22 10:17:42 2017 Julien Fradet
-## Last update Sat May 20 03:53:02 2017 Julien
+## Last update Sat May 20 06:42:59 2017 Julien
 ##
 
 RM	= rm -f
@@ -53,7 +53,9 @@ SRCS	= src/my_minishell2.c         \
 	  src/redirections.c	      \
 	  src/fct_delimitor.c	      \
 	  src/absolute_path.c	      \
-	  src/permissions.c
+	  src/permissions.c	      \
+	  src/permissions_exec.c      \
+	  src/execution_classic.c
 
 OBJS	= $(SRCS:.c=.o)
 

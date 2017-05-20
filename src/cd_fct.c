@@ -5,7 +5,7 @@
 ** Login   <fradet_j@epitech.net>
 ** 
 ** Started on  Wed Mar 22 23:14:14 2017 Julien Fradet
-** Last update Fri May 19 17:30:26 2017 Julien
+** Last update Sat May 20 06:38:15 2017 Julien
 */
 
 #include <dirent.h>
@@ -111,7 +111,8 @@ int		cd_fct(char *cmd, char **tab, char ***ev, int *error)
   char		*pwd;
 
   pwd = NULL;
-  if (strcmp(cmd, "cd") == 0 && tab[1] == NULL) cd_alone(*ev);
+  if (strcmp(cmd, "cd") == 0 && tab[1] == NULL)
+    if (cd_alone(*ev) == 1) return (1);
   if (my_strcmp(cmd, "cd") == 0 && tab[1] != NULL)
     {
       if ((path = malloc(sizeof(char *) * my_strlen(tab[1]))) == NULL)

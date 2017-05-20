@@ -5,7 +5,7 @@
 ** Login   <fradet_j@epitech.net>
 ** 
 ** Started on  Sun Apr  9 13:43:11 2017 Julien Fradet
-** Last update Fri May 19 17:49:01 2017 Julien
+** Last update Sat May 20 04:28:46 2017 Julien
 */
 
 #include <unistd.h>
@@ -31,7 +31,8 @@ int		cd_tiret(char ***ev, char *old_pwd, int *error)
   else
     {
       old_pwd = get_oldpwd(*ev);
-      while (*ev && (my_strncmp((*ev)[++p], "OLDPWD", my_strlen("OLDPWD"))) != 0);
+      while (*ev &&
+	     (my_strncmp((*ev)[++p], "OLDPWD", my_strlen("OLDPWD"))) != 0);
       pwd = my_strdup((*ev)[p]);
       pwd = pwd + 7;
       *ev = path_oldpwd(*ev, old_pwd);
@@ -52,7 +53,7 @@ char		*get_path_home(char **ev)
   path = NULL;
   while (ev && ev[++i] != NULL)
     {
-      if (strncmp(ev[++i], "HOME", my_strlen("HOME")) == 0)
+      if (strncmp(ev[i], "HOME", my_strlen("HOME")) == 0)
 	{
 	  path = my_strdup(ev[i]);
 	  path = path + 5;
@@ -72,10 +73,13 @@ int		cd_alone(char **ev)
   pwd = NULL;
   if ((path = get_path_home(ev)) == NULL)
     return (1);
-  pwd = get_oldpwd(ev);
-  ev = path_oldpwd(ev, pwd);
+  if ((pwd = get_oldpwd(ev)) == NULL)
+    return (1);
+  if ((ev = path_oldpwd(ev, pwd)) == NULL)
+    return (1);
   if (chdir(path) == -1)
     return (1);
-  ev = get_pwd(ev);
+  if ((ev = get_pwd(ev)) == NULL)
+    return (1);
   return (0);
 }

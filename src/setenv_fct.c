@@ -5,7 +5,7 @@
 ** Login   <fradet_j@epitech.net>
 ** 
 ** Started on  Thu Mar 23 03:15:54 2017 Julien Fradet
-** Last update Tue May  9 18:43:56 2017 Julien
+** Last update Sat May 20 06:31:33 2017 Julien
 */
 
 #include <unistd.h>
@@ -15,8 +15,16 @@
 
 void		display_error(char **tab)
 {
-  my_putstr(tab[0]);
-  my_putstr(": Variable name must contain alphanumeric characters.\n");
+  if (tab[3] != NULL)
+    {
+      my_putstr(tab[0]);
+      my_putstr(": Too many arguments\n");
+    }
+  else
+    {
+      my_putstr(tab[0]);
+      my_putstr(": Variable name must contain alphanumeric characters.\n");
+    }
 }
 
 int		check_argument(char *arg, int *error)
@@ -24,6 +32,8 @@ int		check_argument(char *arg, int *error)
   int		i;
 
   i = -1;
+  if (arg == NULL)
+    return (-1);
   while (arg && arg[++i] != '\0')
     if ((arg[i] < 48 || arg[i] > 57) &&
 	(arg[i] < 65 || arg[i] > 90) &&
@@ -84,7 +94,8 @@ int		setenv_fct(char ***ev, char **tab, char *cmd, int *error)
   if (*ev == NULL) return (84);
   if ((my_strncmp(cmd, "setenv", 6) == 0) && (i = -1))
     {
-      if (tab[2] != NULL && ((err = check_argument(tab[1], error) == 0)))
+      if (tab[1] != NULL && tab[2] != NULL &&
+	  ((err = check_argument(tab[1], error) == 0)))
 	*ev = annexe_setenv(*ev, tab);
       else if (tab[1] != NULL && tab[2] == NULL &&
 	       ((err = check_argument(tab[1], error) == 0)))
@@ -95,6 +106,7 @@ int		setenv_fct(char ***ev, char **tab, char *cmd, int *error)
 	  (*ev)[i] = my_strdup(str);
 	  free(str);
 	}
+      else if (tab[1] == NULL) show_wordtab(*ev);
       else
 	display_error(tab);
     }
