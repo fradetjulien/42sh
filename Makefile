@@ -5,7 +5,7 @@
 ## Login   <fradet_j@epitech.net>
 ##
 ## Started on  Wed Mar 22 10:17:42 2017 Julien Fradet
-## Last update Thu May 18 23:09:05 2017 Julien
+## Last update Sat May 20 03:53:02 2017 Julien
 ##
 
 RM	= rm -f
@@ -57,7 +57,7 @@ SRCS	= src/my_minishell2.c         \
 
 OBJS	= $(SRCS:.c=.o)
 
-NAME	= mysh
+NAME	= 42sh
 
 all:	$(NAME)
 
