@@ -5,7 +5,7 @@
 ** Login   <fradet_j@epitech.net>
 ** 
 ** Started on  Fri Apr  7 22:24:40 2017 Julien Fradet
-** Last update Sun May 21 04:38:17 2017 Julien
+** Last update Sun May 21 07:45:55 2017 Julien
 */
 
 #include "lib.h"
@@ -27,6 +27,8 @@ int		n_bu(char **cmd)
       (my_strcmp(cmd[0], "exit") == 0))
     return (1);
   if (my_strcmp(cmd[0], "env") == 0)
+    return (1);
+  if (my_strcmp(cmd[0], "echo") == 0)
     return (1);
   return (0);
 }
