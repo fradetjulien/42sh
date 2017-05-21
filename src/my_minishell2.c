@@ -5,7 +5,7 @@
 ** Login   <fradet_j@epitech.net>
 ** 
 ** Started on  Wed Mar 22 10:12:33 2017 Julien Fradet
-** Last update Sun May 21 08:49:19 2017 Julien
+** Last update Sun May 21 10:07:18 2017 Julien
 */
 
 #include <string.h>
@@ -34,6 +34,8 @@ int		builtins_fct(char ***ev, char **tab, char *cmd, int *error)
   setenv_fct(ev, tab, cmd, error);
   unsetenv_fct(ev, tab, cmd);
   echo(tab);
+  where(tab, *ev, error);
+  which(tab, *ev, error);
   return (0);
 }
 

@@ -5,7 +5,7 @@
 ** Login   <fradet_j@epitech.net>
 ** 
 ** Started on  Wed Mar 22 10:15:23 2017 Julien Fradet
-** Last update Sun May 21 08:49:28 2017 Julien
+** Last update Sun May 21 10:11:53 2017 Julien
 */
 
 #ifndef MY_H_
@@ -43,6 +43,8 @@ int	permissions_exec(char *, char **, int *);
 int	a_path(char *, int *);
 int	check_execution_bin(char *, char **, char **, int *);
 int	echo(char **);
+int	where(char **, char **, int *);
+int	which(char **, char **, int *);
 void	check_isat();
 void	env_fct(char **);
 void	affi();

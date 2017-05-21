@@ -5,7 +5,7 @@
 ## Login   <fradet_j@epitech.net>
 ##
 ## Started on  Wed Mar 22 10:17:42 2017 Julien Fradet
-## Last update Sun May 21 09:01:45 2017 Julien
+## Last update Sun May 21 10:12:56 2017 Julien
 ##
 
 RM	= rm -f
@@ -56,7 +56,9 @@ SRCS	= src/my_minishell2.c         \
 	  src/permissions_exec.c      \
 	  src/execution_classic.c     \
 	  src/loop.c		      \
-	  src/echo.c
+	  src/echo.c		      \
+	  src/where.c		      \
+	  src/which.c
 
 OBJS	= $(SRCS:.c=.o)
 
