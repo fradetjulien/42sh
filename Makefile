@@ -5,7 +5,7 @@
 ## Login   <fradet_j@epitech.net>
 ##
 ## Started on  Wed Mar 22 10:17:42 2017 Julien Fradet
-## Last update Sun May 21 10:12:56 2017 Julien
+## Last update Sun May 21 11:15:33 2017 Julien
 ##
 
 RM	= rm -f
@@ -23,6 +23,7 @@ SRCS	= src/my_minishell2.c         \
 	  src/lib/my_free_wordtab.c   \
 	  src/lib/my_strncmp.c        \
 	  src/lib/my_strdup.c         \
+	  src/lib/my_is_num.c	      \
 	  src/tablen.c                \
 	  src/get_env.c               \
 	  src/my_concat.c             \
@@ -58,7 +59,8 @@ SRCS	= src/my_minishell2.c         \
 	  src/loop.c		      \
 	  src/echo.c		      \
 	  src/where.c		      \
-	  src/which.c
+	  src/which.c		      \
+	  src/repeat.c
 
 OBJS	= $(SRCS:.c=.o)
 

@@ -5,7 +5,7 @@
 ** Login   <julien@epitech.net>
 ** 
 ** Started on  Sun May 21 05:24:48 2017 Julien
-** Last update Sun May 21 09:47:59 2017 Julien
+** Last update Sun May 21 11:05:57 2017 Julien
 */
 
 #include <unistd.h>
@@ -32,6 +32,7 @@ int		loop(char **av, char **env, char **ev, int er)
 	  else
 	    {
 	      tab = str_to_wordtab(cmd, ' '); builtins_fct(&ev, tab, cmd, &er);
+	      repeat(tab, ev, av, &er);
 	      if (((chemin = my_access(tab, get_env(env, "PATH="))) != NULL) &&
 		  n_bu(tab) == 0)
 		execute(chemin, tab, env, &er);

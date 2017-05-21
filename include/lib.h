@@ -5,7 +5,7 @@
 ** Login   <julien@epitech.net>
 ** 
 ** Started on  Thu Apr 20 01:53:14 2017 Julien
-** Last update Thu Apr 20 02:10:03 2017 Julien
+** Last update Sun May 21 10:47:21 2017 Julien
 */
 
 #ifndef LIB_H_
@@ -24,6 +24,7 @@ int     my_strncmp(char *, char *, int);
 int     my_strcmp(char *, char *);
 int     my_strlen(char *);
 int	my_getnbr(const char *);
+int	my_is_num(char *);
 void	free_wordtab(char **);
 void	my_putchar(char);
 void	my_putstr(char *);
