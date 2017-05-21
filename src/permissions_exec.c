@@ -5,7 +5,7 @@
 ** Login   <julien@epitech.net>
 ** 
 ** Started on  Sat May 20 04:59:48 2017 Julien
-** Last update Sat May 20 05:57:31 2017 Julien
+** Last update Sun May 21 04:40:19 2017 Julien
 */
 
 #include <stdlib.h>
@@ -25,8 +25,8 @@ int		permissions_exec(char *cmd, char **tab, int *error)
   int		statut;
 
   statut = 0;
-  if (((statut = absolute_path(cmd, error)) == 1) &&
-      ((statut = not_builtins(tab = str_to_wordtab(cmd, ' '))) == 0))
+  if (((statut = a_path(cmd, error)) == 1) &&
+      ((statut = n_bu(tab = str_to_wordtab(cmd, ' '))) == 0))
     return (1);
   return (0);
 }
@@ -36,8 +36,8 @@ int		permissions_exec_clas(char *cmd, char **tab, int *error)
   int		statut;
 
   statut = 0;
-  if (((statut = absolute_path(cmd, error)) == 0) &&
-      ((statut = not_builtins(tab = str_to_wordtab(cmd, ' '))) == 0))
+  if (((statut = a_path(cmd, error)) == 0) &&
+      ((statut = n_bu(tab = str_to_wordtab(cmd, ' '))) == 0))
       return (1);
   return (0);
 }

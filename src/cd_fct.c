@@ -5,7 +5,7 @@
 ** Login   <fradet_j@epitech.net>
 ** 
 ** Started on  Wed Mar 22 23:14:14 2017 Julien Fradet
-** Last update Sun May 21 01:09:24 2017 Julien
+** Last update Sun May 21 06:28:02 2017 Julien
 */
 
 #include <dirent.h>
@@ -127,10 +127,7 @@ int		cd_fct(char *cmd, char **tab, char ***ev, int *error)
 	  *ev = get_pwd(*ev);
 	}
       else
-	{
-	  my_putstr(tab[1]); my_putstr(": Not a directory.\n");
-	  *error = 1;
-	}
+	my_putstr(tab[1]); my_putstr(": Not a directory.\n"); *error = 1;
     }
   return (0);
 }

@@ -5,7 +5,7 @@
 ** Login   <fradet_j@epitech.net>
 ** 
 ** Started on  Wed Mar 22 10:12:33 2017 Julien Fradet
-** Last update Sun May 21 03:23:50 2017 Julien
+** Last update Sun May 21 05:36:21 2017 Julien
 */
 
 #include <string.h>
@@ -23,6 +23,8 @@ int		builtins_fct(char ***ev, char **tab, char *cmd, int *error)
   int		err;
 
   err = 0;
+  if (annexe(cmd, *ev) == 1)
+    return (1);
   exit_fct(tab[0], tab, error);
   if ((err = cd_fct(tab[0], tab, ev, error)) == 1)
     {
@@ -113,37 +115,11 @@ int		execute(char *path, char **av, char **env, int *error)
 int		main(UNUSED int ac, UNUSED char **av, char **env)
 {
   char		**ev;
-  char		**tab;
-  char		*cmd;
-  char		*chemin;
-  int		error;
-  int		i;
+  int		er;
 
-  error = 0, i = 0;
+  er = 0;
   if ((ev = create_env(env)) == NULL) return (84);
   signal(SIGINT, affi); check_isat();
-  while ((cmd = get_next_line(0)))
-    {
-      if ((error = count_delimitor(cmd)) != 0) return (0);
-      cmd = epur_str(cmd); if (annexe(cmd, ev) == 1);
-      else
-	{
-	  if (((absolute_path(cmd, &error)) == 1) &&
-	      (not_builtins(tab = str_to_wordtab(cmd, ' ')) == 0))
-	    {
-	      if (execute_fct(cmd, av, env, &error) == EXIT_FAILURE)
-		error = 1;
-	    }
-	  else
-	    {
-	      tab = str_to_wordtab(cmd, ' '); builtins_fct(&ev, tab, cmd, &error);
-	      if ((chemin = my_access(tab, get_env(env, "PATH="))) != NULL)
-		execute(chemin, tab, env, &error);
-	      else if (error != 1)
-		if ((i = not_builtins(tab)) == 0) print_error(tab, &error);
-	    }
-	  if (annexe(cmd, ev) != 1) check_isat();
-	}
-    }
-  return (error);
+  return (loop(av, env, ev, er));
+  return (0);
 }

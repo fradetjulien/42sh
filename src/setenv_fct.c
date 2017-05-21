@@ -5,7 +5,7 @@
 ** Login   <fradet_j@epitech.net>
 ** 
 ** Started on  Thu Mar 23 03:15:54 2017 Julien Fradet
-** Last update Sun May 21 03:33:00 2017 Julien
+** Last update Sun May 21 06:26:02 2017 Julien
 */
 
 #include <unistd.h>
@@ -13,12 +13,13 @@
 #include "lib.h"
 #include "my.h"
 
-void		display_error(char **tab)
+void		display_error(char **tab, int *error)
 {
   if (tab[3] != NULL)
     {
       my_putstr(tab[0]);
       my_putstr(": Too many arguments\n");
+      *error = 1;
     }
   else
     {
@@ -108,7 +109,7 @@ int		setenv_fct(char ***ev, char **tab, char *cmd, int *error)
 	}
       else if (tab[1] == NULL) show_wordtab(*ev);
       else
-	display_error(tab);
+	display_error(tab, error);
     }
   return (0);
 }

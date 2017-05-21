@@ -5,7 +5,7 @@
 ** Login   <fradet_j@epitech.net>
 ** 
 ** Started on  Thu Apr  6 17:22:31 2017 Julien Fradet
-** Last update Thu Apr 20 01:59:07 2017 Julien
+** Last update Sun May 21 04:33:23 2017 Julien
 */
 
 #include "lib.h"
@@ -21,7 +21,5 @@ int		annexe(char *cmd, char **ev)
       env_fct(ev);
       cpt = 1;
     }
-  else if (case_enter(cmd) == 1)
-    cpt = 1;
   return (cpt);
 }

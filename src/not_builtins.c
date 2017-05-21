@@ -5,20 +5,20 @@
 ** Login   <fradet_j@epitech.net>
 ** 
 ** Started on  Fri Apr  7 22:24:40 2017 Julien Fradet
-** Last update Thu Apr 20 02:03:02 2017 Julien
+** Last update Sun May 21 04:38:17 2017 Julien
 */
 
 #include "lib.h"
 #include "my.h"
 
-void		print_error(char **cmd, int *error)
+void		print_err(char **cmd, int *error)
 {
   my_putstr(cmd[0]);
   my_putstr(": Command not found.\n");
   *error = 1;
 }
 
-int		not_builtins(char **cmd)
+int		n_bu(char **cmd)
 {
   if ((my_strcmp(cmd[0], "cd") == 0) ||
       (my_strcmp(cmd[0], "setenv") == 0))

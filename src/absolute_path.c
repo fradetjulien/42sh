@@ -5,7 +5,7 @@
 ** Login   <julien@epitech.net>
 ** 
 ** Started on  Tue May 16 14:56:30 2017 Julien
-** Last update Sat May 20 02:13:22 2017 Julien
+** Last update Sun May 21 04:37:40 2017 Julien
 */
 
 #include <string.h>
@@ -74,7 +74,7 @@ int		execute_fct(char *path, char **av, char **env, int *error)
   return (WEXITSTATUS(result));
 }
 
-int		absolute_path(char *cmd, int *error)
+int		a_path(char *cmd, int *error)
 {
   int		i;
 

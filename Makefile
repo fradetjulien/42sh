@@ -5,7 +5,7 @@
 ## Login   <fradet_j@epitech.net>
 ##
 ## Started on  Wed Mar 22 10:17:42 2017 Julien Fradet
-## Last update Sun May 21 03:28:21 2017 Julien
+## Last update Sun May 21 06:34:49 2017 Julien
 ##
 
 RM	= rm -f
@@ -50,21 +50,21 @@ SRCS	= src/my_minishell2.c         \
 	  src/not_builtins.c          \
 	  src/count_delimitor.c       \
 	  src/cd_annexe.c 	      \
-	  src/redirections.c	      \
 	  src/fct_delimitor.c	      \
 	  src/absolute_path.c	      \
 	  src/permissions.c	      \
 	  src/permissions_exec.c      \
-	  src/execution_classic.c
+	  src/execution_classic.c     \
+	  src/loop.c
 
 OBJS	= $(SRCS:.c=.o)
 
 NAME	= 42sh
 
-all:	$(NAME)
-
 $(NAME): $(OBJS)
 	$(CC) -o $(NAME) $(SRCS) $(CFLAGS)
+
+all:	$(NAME)
 
 clean:
 	$(RM) $(OBJS)
