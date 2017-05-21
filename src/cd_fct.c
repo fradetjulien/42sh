@@ -5,7 +5,7 @@
 ** Login   <fradet_j@epitech.net>
 ** 
 ** Started on  Wed Mar 22 23:14:14 2017 Julien Fradet
-** Last update Sun May 21 00:08:36 2017 Julien
+** Last update Sun May 21 01:09:24 2017 Julien
 */
 
 #include <dirent.h>
@@ -112,14 +112,14 @@ int		cd_fct(char *cmd, char **tab, char ***ev, int *error)
 
   pwd = NULL;
   if (strcmp(cmd, "cd") == 0 && tab[1] == NULL)
-    if (cd_alone(*ev) == 1) return (1);
+    return (cd_alone(*ev));
   if (my_strcmp(cmd, "cd") == 0 && tab[1] != NULL)
     {
       if ((path = malloc(sizeof(char *) * my_strlen(tab[1]))) == NULL)
 	return (-1);
       if ((my_strcmp(tab[1], "-") == 0) && (*ev != NULL))
-	cd_tiret(ev, pwd, error);
-      else if ((check_dir(tab)) == 0 || tab[1][0] == '/')
+	return (cd_tiret(ev, pwd, error));
+      else if ((check_dir(tab) == 0) || tab[1][0] == '/')
 	{
 	  pwd = get_oldpwd(*ev); *ev = path_oldpwd(*ev, pwd);
 	  path = my_strcpy(path, tab[1]);

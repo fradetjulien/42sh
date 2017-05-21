@@ -5,13 +5,20 @@
 ** Login   <fradet_j@epitech.net>
 ** 
 ** Started on  Sun Apr  9 13:43:11 2017 Julien Fradet
-** Last update Sat May 20 04:28:46 2017 Julien
+** Last update Sun May 21 00:55:24 2017 Julien
 */
 
 #include <unistd.h>
 #include <string.h>
 #include "lib.h"
 #include "my.h"
+
+int		similary_pwd(char *old_pwd, char *pwd)
+{
+  if (my_strcmp(old_pwd, pwd) == 0)
+    return (1);
+  return (0);
+}
 
 int		cd_tiret(char ***ev, char *old_pwd, int *error)
 {
@@ -37,7 +44,7 @@ int		cd_tiret(char ***ev, char *old_pwd, int *error)
       pwd = pwd + 7;
       *ev = path_oldpwd(*ev, old_pwd);
       if ((chdir(pwd)) == -1) return (1);
-      *ev = get_pwd(*ev);
+      *ev = get_pwd(*ev); return (similary_pwd(old_pwd, pwd));
     }
   return (0);
 }
