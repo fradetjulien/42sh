@@ -5,7 +5,7 @@
 ** Login   <fradet_j@epitech.net>
 ** 
 ** Started on  Wed Mar 22 10:12:33 2017 Julien Fradet
-** Last update Sun May 21 02:16:03 2017 Julien
+** Last update Sun May 21 03:23:50 2017 Julien
 */
 
 #include <string.h>
@@ -69,6 +69,8 @@ char		*my_access(char **cmd, char *path)
   if (path == NULL)
     return (NULL);
   path = path + 5;
+  if (strcmp(path, "/") == 0)
+    return (NULL);
   tab = str_to_wordtab(path, ':');
   while (tab[++i] != NULL)
     {
