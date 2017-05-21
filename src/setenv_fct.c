@@ -5,7 +5,7 @@
 ** Login   <fradet_j@epitech.net>
 ** 
 ** Started on  Thu Mar 23 03:15:54 2017 Julien Fradet
-** Last update Sat May 20 06:31:33 2017 Julien
+** Last update Sun May 21 03:33:00 2017 Julien
 */
 
 #include <unistd.h>
@@ -95,7 +95,7 @@ int		setenv_fct(char ***ev, char **tab, char *cmd, int *error)
   if ((my_strncmp(cmd, "setenv", 6) == 0) && (i = -1))
     {
       if (tab[1] != NULL && tab[2] != NULL &&
-	  ((err = check_argument(tab[1], error) == 0)))
+	  tab[3] == NULL && ((err = check_argument(tab[1], error) == 0)))
 	*ev = annexe_setenv(*ev, tab);
       else if (tab[1] != NULL && tab[2] == NULL &&
 	       ((err = check_argument(tab[1], error) == 0)))
